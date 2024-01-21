@@ -9,6 +9,7 @@ using BidOne.CodeTest.Services.Interfaces;
 using BidOne.CodeTest.Core.Entities;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
 namespace BidOne.CodeTest.Test
 {
@@ -34,22 +35,28 @@ namespace BidOne.CodeTest.Test
                 LastName = ""
             };
 
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => _personService.WriteToJsonFile(invalidPerson));
+            //Act
+            Exception ex = Assert.Throws<Exception>(() => _personService.WriteToJsonFile(invalidPerson));
+
+            //Assert
+            Assert.That(ex.Message, Is.EqualTo("FirstName is required."));
         }
 
         [Test]
         public void WriteNewPerson_ThrowsFormatException()
         {
-            // Arrange
+            //Arrange
             var invalidPerson = new Person
             {
                 FirstName = "Nimal123",
-                LastName = ""
+                LastName = "Perera"
             };
 
-            // Act & Assert
-            Assert.Throws<ArgumentException>(() => _personService.WriteToJsonFile(invalidPerson));
+            //Act
+            Exception ex = Assert.Throws<Exception>(() => _personService.WriteToJsonFile(invalidPerson));
+
+            //Assert
+            Assert.That(ex.Message, Is.EqualTo("Invalid First Name"));
         }
     }
 }

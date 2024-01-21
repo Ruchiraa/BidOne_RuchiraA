@@ -22,14 +22,14 @@ namespace BidOne.CodeTest.Services
         {
             try
             {
-               Validate(person);
+                Validate(person);
                return _jsonWriter.WriteToFile(person, "Jsons\\Person.json");
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         private void Validate(Person validPerson)
