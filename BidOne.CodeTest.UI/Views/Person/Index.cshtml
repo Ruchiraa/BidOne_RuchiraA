@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model BidOne.CodeTest.UI.Models.PersonModel
+
+<html>
+    <head>
+        <title>Person Data</title>
+    </head>
+    <body>
+        <div id="contentDiv">
+            <form asp-controller="Person" asp-action="WriteToJson" method="post">
+                <div>
+                    <label for="lblFirstName">Enter First Name:</label>
+                <input type="text" id="FirstName"  name="firstName" value="@Model.FirstName" placeholder="Enter a valid First Name" required />
+                </div>
+                <br />
+                <div>
+                    <label for="lblLastName">Enter Last Name:</label>
+                <input type="text" id="LastName" name="lastName" value="@Model.LastName" placeholder="Enter a valid Last Name" required />
+                </div>
+                <br />
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+                <br />
+
+                @if (ViewBag.Message != null)
+                {
+                        <script type="text/javascript">
+                            alert('@ViewBag.Message');
+                            document.getElementById('FirstName').value = '';
+                            document.getElementById('LastName').value = '';
+                        </script>
+                }
+            </form>
+        </div>
+    </body>
+</html>
